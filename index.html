@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood-Based Quote Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #8e44ad, #3498db);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: 'Lobster', cursive;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #ffeb3b;
+    }
+
+    .quote {
+      font-size: 1.5em;
+      font-style: italic;
+      margin-bottom: 20px;
+      color: #f9f9f9;
+    }
+
+    .author {
+      font-size: 1.2em;
+      color: #e0e0e0;
+      margin-bottom: 30px;
+    }
+
+    select {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+      margin-bottom: 20px;
+      cursor: pointer;
+      background-color: #fff;
+      color: #333;
+    }
+
+    button {
+      background: linear-gradient(to right, #f39c12, #f1c40f);
+      border: none;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 1em;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      outline: none;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #f1c40f, #f39c12);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .quote, .author {
+      animation: fadeIn 1s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Inspiration Quotes</h1>
+    <div class="quote" id="quote">"Select a mood and click the button!"</div>
+    <div class="author" id="author">- Author</div>
+
+    <!-- Dropdown for mood selection -->
+    <select id="moodSelector">
+      <option value="happy">Happy</option>
+      <option value="sad">Sad</option>
+      <option value="motivational">Motivational</option>
+      <option value="love">Love</option>
+    </select>
+    
+    <button onclick="generateQuote()">Generate Quote</button>
+  </div>
+
+  <script>
+    // Quotes categorized by mood
+    const quotes = {
+      happy: [
+        { text: "Happiness is not by chance, but by choice.", author: "Jim Rohn" },
+        { text: "For every minute you are angry, you lose sixty seconds of happiness.", author: "Ralph Waldo Emerson" }
+      ],
+      sad: [
+        { text: "Tears come from the heart and not from the brain.", author: "Leonardo da Vinci" },
+        { text: "Sadness flies away on the wings of time.", author: "Jean de La Fontaine" }
+      ],
+      motivational: [
+        { text: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
+        { text: "Do not wait to strike till the iron is hot; but make it hot by striking.", author: "William Butler Yeats" }
+      ],
+      love: [
+        { text: "The best thing to hold onto in life is each other.", author: "Audrey Hepburn" },
+        { text: "Love is composed of a single soul inhabiting two bodies.", author: "Aristotle" }
+      ]
+    };
+
+    // Function to generate quote based on the selected mood
+    function generateQuote() {
+      const selectedMood = document.getElementById('moodSelector').value;
+      const moodQuotes = quotes[selectedMood];
+      const randomIndex = Math.floor(Math.random() * moodQuotes.length);
+      const selectedQuote = moodQuotes[randomIndex];
+      document.getElementById('quote').textContent = `"${selectedQuote.text}"`;
+      document.getElementById('author').textContent = `- ${selectedQuote.author}`;
+    }
+  </script>
+
+</body>
+</html>
